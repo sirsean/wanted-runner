@@ -104,13 +104,14 @@ function Poster() {
     const outsideText = useSelector(selectOutsideText);
     if (runner) {
         const talent = runner.attributes.Talent;
+        const notoriety = runner.attributes['Notoriety Points'];
         return (
             <div className="Poster">
                 <h1>:: Wanted ::</h1>
                 <div className="imgWrapper">
                     <img className="runner" src={runner.image} alt={runner.name} />
                     <span className="runner-id">{runner.id}</span>
-                    <span className="talent">T{talent}</span>
+                    <span className="talent">T{talent}<br /><span className="notoriety">NP{notoriety}</span></span>
                     {insideText && <span className="inside-text"><Sanitized value={insideText} /></span>}
                 </div>
                 <div className="outside-text"><Sanitized value={outsideText} /></div>
