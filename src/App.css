@@ -99,7 +99,9 @@ textarea {
 
 .Poster {
     width: 500px;
-    margin: 0 auto;
+    margin: 20px auto;
+    border: 2px solid var(--blue);
+    padding: 30px;
 }
 
 .Poster h1 {

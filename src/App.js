@@ -106,15 +106,18 @@ function Poster() {
         const talent = runner.attributes.Talent;
         const notoriety = runner.attributes['Notoriety Points'];
         return (
-            <div className="Poster">
-                <h1>:: Wanted ::</h1>
-                <div className="imgWrapper">
-                    <img className="runner" src={runner.image} alt={runner.name} />
-                    <span className="runner-id">{runner.id}</span>
-                    <span className="talent">T{talent}<br /><span className="notoriety">NP {notoriety}</span></span>
-                    {insideText && <span className="inside-text"><Sanitized value={insideText} /></span>}
+            <div>
+                <div className="Poster">
+                    <h1>:: Wanted ::</h1>
+                    <div className="imgWrapper">
+                        <img className="runner" src={runner.image} alt={runner.name} />
+                        <span className="runner-id">{runner.id}</span>
+                        <span className="talent">T{talent}<br /><span className="notoriety">NP {notoriety}</span></span>
+                        {insideText && <span className="inside-text"><Sanitized value={insideText} /></span>}
+                    </div>
+                    <div className="outside-text"><Sanitized value={outsideText} /></div>
                 </div>
-                <div className="outside-text"><Sanitized value={outsideText} /></div>
+                <p className="bottom-copy">screenshot it to share</p>
             </div>
         );
     }
@@ -124,10 +127,7 @@ function Main() {
     return (
         <div className="Main">
             <Form />
-            <hr />
             <Poster />
-            <hr />
-            <p className="bottom-copy">screenshot it to share</p>
         </div>
     );
 }
