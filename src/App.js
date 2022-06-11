@@ -76,7 +76,7 @@ function Form() {
                     <tr>
                         <th>Outside</th>
                         <td>
-                            <textarea rows="8" onChange={formSetOutsideText} />
+                            <textarea rows="14" onChange={formSetOutsideText} />
                         </td>
                     </tr>
                 </tbody>
@@ -126,17 +126,16 @@ function Poster() {
 function Main() {
     return (
         <div className="Main">
-            <Form />
-            <Poster />
+            <div className="row">
+                <div className="left">
+                    <h1>wanted-runner</h1>
+                    <Form />
+                </div>
+                <div className="right">
+                    <Poster />
+                </div>
+            </div>
         </div>
-    );
-}
-
-function Header() {
-    return (
-        <header>
-            <div className="left"><h1>wanted-runner</h1></div>
-        </header>
     );
 }
 
@@ -144,7 +143,6 @@ function App() {
     return (
         <Provider store={store}>
             <div className="App">
-                <Header />
                 <Main />
             </div>
         </Provider>
