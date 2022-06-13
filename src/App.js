@@ -10,34 +10,31 @@ const slice = createSlice({
     name: 'wanted-runner',
     initialState: {
         runner: null,
-        insideText: null,
-        outsideText: null,
+        display: {
+            insideText: null,
+            outsideText: null,
+        },
     },
     reducers: {
         setRunner: (state, action) => {
             state.runner = action.payload?.runner;
         },
-        setInsideText: (state, action) => {
-            state.insideText = action.payload;
-        },
-        setOutsideText: (state, action) => {
-            state.outsideText = action.payload;
+        updateDisplay: (state, action) => {
+            state.display = Object.assign({}, state.display, action.payload);
         },
     },
 });
 
 const {
     setRunner,
-    setInsideText,
-    setOutsideText,
+    updateDisplay,
 } = slice.actions;
 const store = configureStore({
     reducer: slice.reducer,
 });
 
 const selectRunner = state => state.runner;
-const selectInsideText = state => state.insideText;
-const selectOutsideText = state => state.outsideText;
+const selectDisplay = state => state.display;
 
 async function fetchRunner(runnerId) {
     fetch(`https://2112-api.sirsean.workers.dev/runner/${runnerId}`)
@@ -54,10 +51,10 @@ function Form() {
         fetchRunner(e.target.value);
     }
     const formSetInsideText = (e) => {
-        store.dispatch(setInsideText(e.target.value));
+        store.dispatch(updateDisplay({ insideText: e.target.value }));
     }
     const formSetOutsideText = (e) => {
-        store.dispatch(setOutsideText(e.target.value));
+        store.dispatch(updateDisplay({ outsideText: e.target.value }));
     }
     return (
         <div className="Form">
@@ -100,8 +97,7 @@ function Sanitized({ value }) {
 
 function Poster() {
     const runner = useSelector(selectRunner);
-    const insideText = useSelector(selectInsideText);
-    const outsideText = useSelector(selectOutsideText);
+    const display = useSelector(selectDisplay);
     if (runner) {
         const talent = runner.attributes.Talent;
         const notoriety = runner.attributes['Notoriety Points'];
@@ -113,9 +109,9 @@ function Poster() {
                         <img className="runner" src={runner.image} alt={runner.name} />
                         <span className="runner-id">{runner.id}</span>
                         <span className="talent">T{talent}<br /><span className="notoriety">NP {notoriety}</span></span>
-                        {insideText && <span className="inside-text"><Sanitized value={insideText} /></span>}
+                        {display.insideText && <span className="inside-text"><Sanitized value={display.insideText} /></span>}
                     </div>
-                    <div className="outside-text"><Sanitized value={outsideText} /></div>
+                    <div className="outside-text"><Sanitized value={display.outsideText} /></div>
                 </div>
                 <p className="bottom-copy">screenshot it to share</p>
             </div>
