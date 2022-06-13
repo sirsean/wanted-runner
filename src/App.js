@@ -13,6 +13,8 @@ const slice = createSlice({
         display: {
             insideText: null,
             outsideText: null,
+            showTalent: true,
+            showNP: true,
         },
     },
     reducers: {
@@ -56,6 +58,13 @@ function Form() {
     const formSetOutsideText = (e) => {
         store.dispatch(updateDisplay({ outsideText: e.target.value }));
     }
+    const formSetShowTalent = (e) => {
+        store.dispatch(updateDisplay({ showTalent: e.target.checked }));
+    }
+    const formSetShowNP = (e) => {
+        store.dispatch(updateDisplay({ showNP: e.target.checked }));
+    }
+    const display = useSelector(selectDisplay);
     return (
         <div className="Form">
             <table>
@@ -74,6 +83,18 @@ function Form() {
                         <th>Outside</th>
                         <td>
                             <textarea rows="14" onChange={formSetOutsideText} />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Show Talent</th>
+                        <td>
+                            <input type="checkbox" checked={display.showTalent} onChange={formSetShowTalent} />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Show NP</th>
+                        <td>
+                            <input type="checkbox" checked={display.showNP} onChange={formSetShowNP} />
                         </td>
                     </tr>
                 </tbody>
@@ -108,7 +129,11 @@ function Poster() {
                     <div className="imgWrapper">
                         <img className="runner" src={runner.image} alt={runner.name} />
                         <span className="runner-id">{runner.id}</span>
-                        <span className="talent">T{talent}<br /><span className="notoriety">NP {notoriety}</span></span>
+                        <span className="talent">
+                            {display.showTalent && <span>T{talent}</span>}
+                            {display.showTalent && display.showNP && <br />}
+                            {display.showNP && <span className="notoriety">NP {notoriety}</span>}
+                        </span>
                         {display.insideText && <span className="inside-text"><Sanitized value={display.insideText} /></span>}
                     </div>
                     <div className="outside-text"><Sanitized value={display.outsideText} /></div>
