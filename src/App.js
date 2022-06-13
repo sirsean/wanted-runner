@@ -11,6 +11,7 @@ const slice = createSlice({
     initialState: {
         runner: null,
         display: {
+            title: 'Wanted',
             insideText: null,
             outsideText: null,
             showTalent: true,
@@ -52,6 +53,9 @@ function Form() {
         store.dispatch(setRunner()); // clear the runner before loading new one
         fetchRunner(e.target.value);
     }
+    const formSetTitle = (e) => {
+        store.dispatch(updateDisplay({ title: e.target.value }));
+    }
     const formSetInsideText = (e) => {
         store.dispatch(updateDisplay({ insideText: e.target.value }));
     }
@@ -72,6 +76,12 @@ function Form() {
                     <tr>
                         <th>Runner ID</th>
                         <td><input type="text" onChange={debounce(formSetRunnerId, 400)} /></td>
+                    </tr>
+                    <tr>
+                        <th>Title</th>
+                        <td>
+                            <textarea rows="3" onChange={formSetTitle} defaultValue={display.title} />
+                        </td>
                     </tr>
                     <tr>
                         <th>Inside</th>
@@ -125,7 +135,7 @@ function Poster() {
         return (
             <div>
                 <div className="Poster">
-                    <h1>:: Wanted ::</h1>
+                    <h1>:: {display.title} ::</h1>
                     <div className="imgWrapper">
                         <img className="runner" src={runner.image} alt={runner.name} />
                         <span className="runner-id">{runner.id}</span>
