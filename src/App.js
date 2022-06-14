@@ -12,7 +12,8 @@ const slice = createSlice({
         runner: null,
         display: {
             title: '# :: WANTED ::',
-            insideText: null,
+            insideLeft: null,
+            insideRight: null,
             outsideText: null,
             showTalent: true,
             showNP: true,
@@ -56,8 +57,11 @@ function Form() {
     const formSetTitle = (e) => {
         store.dispatch(updateDisplay({ title: e.target.value }));
     }
-    const formSetInsideText = (e) => {
-        store.dispatch(updateDisplay({ insideText: e.target.value }));
+    const formSetInsideLeft = (e) => {
+        store.dispatch(updateDisplay({ insideLeft: e.target.value }));
+    }
+    const formSetInsideRight = (e) => {
+        store.dispatch(updateDisplay({ insideRight: e.target.value }));
     }
     const formSetOutsideText = (e) => {
         store.dispatch(updateDisplay({ outsideText: e.target.value }));
@@ -84,9 +88,15 @@ function Form() {
                         </td>
                     </tr>
                     <tr>
-                        <th>Inside</th>
+                        <th>Inside Left</th>
                         <td>
-                            <textarea rows="3" onChange={formSetInsideText} />
+                            <textarea rows="3" onChange={formSetInsideLeft} />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Inside Right</th>
+                        <td>
+                            <textarea rows="3" onChange={formSetInsideRight} />
                         </td>
                     </tr>
                     <tr>
@@ -144,7 +154,8 @@ function Poster() {
                             {display.showTalent && display.showNP && <br />}
                             {display.showNP && <span className="notoriety">NP {notoriety}</span>}
                         </span>
-                        {display.insideText && <span className="inside-text"><Sanitized value={display.insideText} /></span>}
+                        {display.insideLeft && <span className="inside-text inside-left"><Sanitized value={display.insideLeft} /></span>}
+                        {display.insideRight && <span className="inside-text inside-right"><Sanitized value={display.insideRight} /></span>}
                     </div>
                     <div className="outside-text"><Sanitized value={display.outsideText} /></div>
                 </div>

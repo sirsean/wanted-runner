@@ -142,9 +142,6 @@ img.runner {
 }
 
 .imgWrapper .inside-text {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
     color: var(--yellow);
     text-shadow: 1px 1px 2px var(--black);
     font-size: 1.8em;
@@ -153,6 +150,18 @@ img.runner {
 
 .imgWrapper .inside-text p {
     margin: 0;
+}
+
+.imgWrapper .inside-left {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+
+.imgWrapper .inside-right {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
 }
 
 .outside-text h1 {
