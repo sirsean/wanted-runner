@@ -11,7 +11,7 @@ const slice = createSlice({
     initialState: {
         runner: null,
         display: {
-            title: 'Wanted',
+            title: '# :: WANTED ::',
             insideText: null,
             outsideText: null,
             showTalent: true,
@@ -135,7 +135,7 @@ function Poster() {
         return (
             <div>
                 <div className="Poster">
-                    <h1>:: {display.title} ::</h1>
+                    <div className="title"><Sanitized value={display.title} /></div>
                     <div className="imgWrapper">
                         <img className="runner" src={runner.image} alt={runner.name} />
                         <span className="runner-id">{runner.id}</span>
